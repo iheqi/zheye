@@ -5,9 +5,9 @@
     <form action="">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <validate-input :rules="emailRules"></validate-input>
+        <validate-input :rules="emailRules" v-model="emailRef.val"></validate-input>
       </div>
-
+      {{emailRef.val}}
       <!-- <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
         <input

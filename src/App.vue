@@ -5,8 +5,12 @@
     <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <validate-input :rules="emailRules"
-                        v-model="emailRef.val" placeholder="1212"></validate-input>
+        <validate-input
+          :rules="emailRules"
+          v-model="emailRef.val" placeholder="1212"
+          ref="inputRef"
+        >
+        </validate-input>
       </div>
       {{emailRef.val}}
 
@@ -19,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import ColumnList, { ColumnProps } from './components/ColumnList.vue';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
 import ValidateInput, { RulesProp } from './components/ValidateInput.vue';
@@ -67,6 +71,7 @@ export default defineComponent({
   },
 
   setup() {
+    const inputRef = ref<any>();
     const emailRef = reactive({
       val: '',
       error: false,
@@ -78,6 +83,7 @@ export default defineComponent({
     ];
 
     const onFormSubmit = (res: boolean) => {
+      console.log(inputRef.value);
       console.log('res', res);
     };
 
@@ -91,6 +97,7 @@ export default defineComponent({
       emailRef,
       emailRules,
       onFormSubmit,
+      inputRef,
     };
   },
 });

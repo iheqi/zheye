@@ -2,26 +2,19 @@
   <div class="container">
     <global-header :user="user"></global-header>
     <!-- <column-list :list="list"></column-list> -->
-    <form action="">
+    <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
-        <validate-input :rules="emailRules" v-model="emailRef.val" placeholder="1212"></validate-input>
+        <validate-input :rules="emailRules"
+                        v-model="emailRef.val" placeholder="1212"></validate-input>
       </div>
       {{emailRef.val}}
-      <!-- <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
-        <input
-          type="text" class="form-control" id="exampleInputEmail1"
-          v-model="emailRef.val"
-          @blur="validateEmail"
-        >
-        <div class="form-text" v-if="emailRef.error">{{emailRef.message}}</div>
-      </div> -->
+
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">密码</label>
         <input type="password" class="form-control" id="exampleInputPassword1">
       </div>
-    </form>
+    </validate-form>
   </div>
 </template>
 
@@ -30,6 +23,7 @@ import { defineComponent, reactive } from 'vue';
 import ColumnList, { ColumnProps } from './components/ColumnList.vue';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
 import ValidateInput, { RulesProp } from './components/ValidateInput.vue';
+import ValidateForm from './components/ValidateForm.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const testList: ColumnProps[] = [
@@ -69,6 +63,7 @@ export default defineComponent({
     ColumnList,
     GlobalHeader,
     ValidateInput,
+    ValidateForm,
   },
 
   setup() {
@@ -81,6 +76,11 @@ export default defineComponent({
       { type: 'required', message: '电子邮箱地址不能为空' },
       { type: 'email', message: '请输入正确的电子邮箱格式' },
     ];
+
+    const onFormSubmit = (res: boolean) => {
+      console.log('res', res);
+    };
+
     return {
       list: testList,
       user: {
@@ -90,6 +90,7 @@ export default defineComponent({
       },
       emailRef,
       emailRules,
+      onFormSubmit,
     };
   },
 });

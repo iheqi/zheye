@@ -13,22 +13,29 @@
 import { defineComponent, onUnmounted } from 'vue';
 import mitt from 'mitt';
 
+type ValidateFunc = () => boolean;
+
 export const emitter = mitt();
 export default defineComponent({
   emits: ['form-submit'],
 
   setup(props, context) {
+    let funcArr: ValidateFunc[] = [];
+
     const submitForm = () => {
-      context.emit('form-submit', true);
+      console.log('click, fuck');
+      const result = funcArr.map((func) => func()).every((res) => res);
+      context.emit('form-submit', result);
     };
 
-    const callback = (s: string) => {
-      console.log(s, 'fuck');
+    const callback = (func) => {
+      funcArr.push(func);
     };
     // 添加监听
     emitter.on('form-item-created', callback);
     onUnmounted(() => {
       emitter.off('form-item-created', callback);
+      funcArr = [];
     });
     return {
       submitForm,

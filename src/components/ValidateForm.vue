@@ -9,9 +9,11 @@
   </form>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, onUnmounted } from 'vue';
+import mitt from 'mitt';
 
+export const emitter = mitt();
 export default defineComponent({
   emits: ['form-submit'],
 
@@ -20,6 +22,14 @@ export default defineComponent({
       context.emit('form-submit', true);
     };
 
+    const callback = (s: string) => {
+      console.log(s, 'fuck');
+    };
+    // 添加监听
+    emitter.on('form-item-created', callback);
+    onUnmounted(() => {
+      emitter.off('form-item-created', callback);
+    });
     return {
       submitForm,
     };

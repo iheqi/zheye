@@ -7,7 +7,7 @@
         <label class="form-label">邮箱地址</label>
         <validate-input
           :rules="emailRules"
-          v-model="emailRef.val" placeholder="1212"
+          v-model="emailRef.val" placeholder="请输入"
           ref="inputRef"
         >
         </validate-input>
@@ -73,7 +73,7 @@ export default defineComponent({
   setup() {
     const inputRef = ref<any>();
     const emailRef = reactive({
-      val: '',
+      val: '123@qq.com',
       error: false,
       message: '',
     });
@@ -102,5 +102,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style></style>

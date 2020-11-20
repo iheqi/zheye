@@ -13,7 +13,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from 'vue';
+import {
+  defineComponent, onMounted, PropType, reactive,
+} from 'vue';
+import { emitter } from './ValidateForm.vue';
 
 const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -42,6 +45,10 @@ export default defineComponent({
       inputRef.val = targetValue;
       context.emit('update:modelValue', targetValue);
     };
+
+    onMounted(() => {
+      emitter.emit('form-item-created', inputRef.val);
+    });
 
     const validateInput = () => {
       if (props.rules) {

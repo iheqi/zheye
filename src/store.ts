@@ -30,4 +30,12 @@ export default createStore<GlobalDataProps>({
       state.user = { isLogin: true, ...payload };
     },
   },
+
+  getters: {
+    biggerColumnsLen(state) {
+      return state.columns.filter((c) => c.id > 2).length;
+    },
+    getColumnById: (state) => (id: number) => state.columns.find((c) => c.id === id),
+    getPostByCid: (state) => (cid: number) => state.posts.filter((post) => post.columnId === cid),
+  },
 });

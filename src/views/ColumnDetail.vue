@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 import PostList from '../components/PostList.vue';
-import { testData, testPosts } from '../testData';
 
 export default defineComponent({
   components: {
@@ -27,10 +27,11 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
+    const store = useStore();
     const currentId = +route.params.id;
-    const column = testData.find((c) => c.id === currentId);
-    const list = testPosts.filter((p) => p.columnId === currentId);
-
+    const column = computed(() => store.getters.getColumnById(currentId));
+    const list = computed(() => store.getters.getPostByCid(currentId));
+    console.log(column);
     return {
       route,
       column,

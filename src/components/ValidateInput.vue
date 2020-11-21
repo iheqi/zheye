@@ -7,7 +7,17 @@
       @blur="validateInput"
       @input="updateValue"
       v-bind="$attrs"
+      v-if="tag !== 'textarea'"
     >
+    <textarea type="text"
+      class="form-control"
+      :class="{'is-invalid': inputRef.error}"
+      v-model="inputRef.val"
+      @blur="validateInput"
+      @input="updateValue"
+      v-bind="$attrs"
+      v-else
+    ></textarea>
     <span v-if="inputRef.error" class="invalid-feedback">{{inputRef.message}}</span>
   </div>
 </template>
@@ -26,11 +36,16 @@ interface RuleProp {
 }
 
 export type RulesProp = RuleProp[];
+export type TagType = 'input' | 'textarea';
 
 export default defineComponent({
   props: {
     rules: Array as PropType<RulesProp>,
     modelValue: String,
+    tag: {
+      type: String as PropType<TagType>,
+      default: 'input',
+    },
   },
   inheritAttrs: false,
   setup(props, context) {

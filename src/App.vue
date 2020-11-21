@@ -17,7 +17,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import {
+  computed, defineComponent, reactive, ref,
+} from 'vue';
+import { useStore } from 'vuex';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,32 +31,10 @@ export default defineComponent({
   },
 
   setup() {
-    const inputRef = ref<any>();
-    const emailRef = reactive({
-      val: '123@qq.com',
-      error: false,
-      message: '',
-    });
-    const emailRules = [
-      { type: 'required', message: '电子邮箱地址不能为空' },
-      { type: 'email', message: '请输入正确的电子邮箱格式' },
-    ];
-
-    const onFormSubmit = (res: boolean) => {
-      console.log(inputRef.value);
-      console.log('res', res);
-    };
-
+    const store = useStore();
+    const user = computed(() => store.state.user);
     return {
-      user: {
-        isLogin: true,
-        name: 'qihe',
-        id: 0,
-      },
-      emailRef,
-      emailRules,
-      onFormSubmit,
-      inputRef,
+      user,
     };
   },
 });

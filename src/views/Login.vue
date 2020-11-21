@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import ValidateInput, { RulesProp } from '../components/ValidateInput.vue';
 import ValidateForm from '../components/ValidateForm.vue';
 
@@ -50,12 +51,14 @@ export default defineComponent({
     const passwordRules: RulesProp = [
       { type: 'required', message: '密码不能为空' },
     ];
+
+    const store = useStore();
     const onFormSubmit = (result: boolean) => {
       if (result) {
-        router.push({
-          name: 'column',
-          params: { id: 1 },
+        store.commit('login', {
+          name: 'iheqi',
         });
+        router.push('/');
       }
     };
     return {

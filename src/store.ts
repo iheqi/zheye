@@ -47,9 +47,7 @@ export default createStore<GlobalDataProps>({
 
   actions: {
     fetchColumns(context) {
-      console.log('test');
       axios.get('/mock/columns.json').then((resp) => {
-        console.log(resp, 'resp');
         context.commit('fetchColumns', resp.data);
       });
     },

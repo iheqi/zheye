@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 v-show="isLoading">loading</h1>
+    <loader v-if="isLoading" text="拼命加载中"></loader>
     <global-header :user="user"></global-header>
     <router-view></router-view>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
@@ -24,11 +24,13 @@ import {
 import { useStore } from 'vuex';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Loader from './components/Loader.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     GlobalHeader,
+    Loader,
   },
 
   setup() {

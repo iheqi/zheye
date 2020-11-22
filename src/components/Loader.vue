@@ -1,4 +1,5 @@
 <template>
+<teleport to="#__loading__">
 <div
   class="d-flex justify-content-center align-items-center h-100 w-100 loading-container"
   :style="{backgroundColor: background || ''}"
@@ -9,6 +10,7 @@
     <p v-if="text" class="text-primary small">{{text}}</p>
   </div>
 </div>
+</teleport>
 </template>
 
 <script lang="ts">
@@ -22,6 +24,15 @@ export default defineComponent({
     background: {
       type: String,
     },
+  },
+
+  setup() {
+    let node = document.getElementById('__loading__');
+    if (!node) {
+      node = document.createElement('div');
+      node.id = '__loading__';
+      document.body.appendChild(node);
+    }
   },
 });
 </script>

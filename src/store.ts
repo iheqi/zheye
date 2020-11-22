@@ -15,6 +15,7 @@ export interface GlobalDataProps {
   columns: ColumnProps[];
   posts: PostProps[];
   user: UserProps;
+  isLoading: boolean;
 }
 
 export default createStore<GlobalDataProps>({
@@ -26,6 +27,7 @@ export default createStore<GlobalDataProps>({
       columnId: 1,
       name: 'qihe',
     },
+    isLoading: false,
   },
 
   mutations: {
@@ -37,6 +39,9 @@ export default createStore<GlobalDataProps>({
     },
     fetchColumns(state, data) {
       state.columns = data;
+    },
+    setLoading(state, flag) {
+      state.isLoading = flag;
     },
   },
 

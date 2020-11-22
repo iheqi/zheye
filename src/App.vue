@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1 v-show="isLoading">loading</h1>
     <global-header :user="user"></global-header>
     <router-view></router-view>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
@@ -32,9 +33,12 @@ export default defineComponent({
 
   setup() {
     const store = useStore();
+
+    const isLoading = computed(() => store.state.isLoading);
     const user = computed(() => store.state.user);
     return {
       user,
+      isLoading,
     };
   },
 });

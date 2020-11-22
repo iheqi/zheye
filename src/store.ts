@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
+import axios from 'axios';
 import {
-  testData, testPosts, ColumnProps, PostProps,
+  testPosts, ColumnProps, PostProps,
 } from './testData';
 
 interface UserProps {
@@ -18,7 +19,7 @@ export interface GlobalDataProps {
 
 export default createStore<GlobalDataProps>({
   state: {
-    columns: testData,
+    columns: [],
     posts: testPosts,
     user: {
       isLogin: true,
@@ -34,8 +35,20 @@ export default createStore<GlobalDataProps>({
     createPost(state, newPost) {
       state.posts.push(newPost);
     },
+    fetchColumns(state, data) {
+      state.columns = data;
+    },
   },
 
+  actions: {
+    fetchColumns(context) {
+      console.log('test');
+      axios.get('/mock/columns.json').then((resp) => {
+        console.log(resp, 'resp');
+        context.commit('fetchColumns', resp.data);
+      });
+    },
+  },
   getters: {
     biggerColumnsLen(state) {
       return state.columns.filter((c) => c.id > 2).length;

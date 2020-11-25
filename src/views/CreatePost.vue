@@ -57,9 +57,6 @@ import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import ValidateInput, { RulesProp } from '../components/ValidateInput.vue';
 import ValidateForm from '../components/ValidateForm.vue';
-import {
-  GlobalDataProps, PostProps, ResponseType,
-} from '../store';
 
 export default defineComponent({
   name: 'Login',

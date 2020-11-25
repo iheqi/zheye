@@ -2,6 +2,7 @@
   <div class="container">
     <loader v-if="isLoading" text="拼命加载中"></loader>
     <global-header :user="user"></global-header>
+    <uploader></uploader>
     <router-view></router-view>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
       <small>
@@ -25,12 +26,14 @@ import { useStore } from 'vuex';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loader from './components/Loader.vue';
+import Uploader from './components/Uploader.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     GlobalHeader,
     Loader,
+    Uploader,
   },
 
   setup() {

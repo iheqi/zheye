@@ -2,7 +2,7 @@
   <div class="container">
     <loader v-if="isLoading" text="拼命加载中"></loader>
     <global-header :user="user"></global-header>
-    <uploader></uploader>
+    <uploader action="https://baidu.com"></uploader>
     <router-view></router-view>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
       <small>

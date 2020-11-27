@@ -2,6 +2,8 @@
   <div class="file-upload">
     <button @click.prevent="triggerUpload" class="btn btn-primary">
       <span v-show="fileStatus === 'loading'">正在上传...</span>
+      <span v-show="fileStatus === 'success'">上传成功</span>
+      <span v-show="fileStatus === 'error'">上传失败</span>
       点击上传
     </button>
 
@@ -43,6 +45,16 @@ export default defineComponent({
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+        }).then((resp) => {
+          console.log(resp.data);
+          fileStatus.value = 'success';
+        }).catch((err) => {
+          console.log(err);
+          fileStatus.value = 'error';
+        }).finally(() => {
+          if (fileInput.value) {
+            fileInput.value.value = '';
+          }
         });
       }
     };

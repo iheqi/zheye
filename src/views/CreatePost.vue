@@ -58,6 +58,14 @@ import { useRouter, useRoute } from 'vue-router';
 import ValidateInput, { RulesProp } from '../components/ValidateInput.vue';
 import ValidateForm from '../components/ValidateForm.vue';
 
+export interface PostProps {
+  id: number;
+  title: string;
+  content: string;
+  image?: string;
+  createdAt: string;
+  columnId: number;
+}
 export default defineComponent({
   name: 'Login',
   components: {

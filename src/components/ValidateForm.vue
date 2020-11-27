@@ -28,7 +28,7 @@ export default defineComponent({
       context.emit('form-submit', result);
     };
 
-    const callback = (func) => {
+    const callback = (func: any) => {
       funcArr.push(func);
     };
     // 添加监听

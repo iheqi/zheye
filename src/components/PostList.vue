@@ -18,6 +18,15 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
+export interface PostProps {
+  id: number;
+  title: string;
+  content: string;
+  image?: string;
+  createdAt: string;
+  columnId: number;
+}
+
 export default defineComponent({
   props: {
     list: {
